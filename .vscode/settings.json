@@ -1,0 +1,11 @@
+{
+    "cSpell.words": [
+        "Bootloader",
+        "eabi",
+        "rustflags",
+        "Tlink"
+    ],
+    "rust-analyzer.cargo.target": "thumbv7em-none-eabihf",
+    "rust-analyzer.checkOnSave.allTargets": false,
+    "rust-analyzer.cargo.allFeatures": false,
+}
