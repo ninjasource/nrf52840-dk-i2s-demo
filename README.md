@@ -44,11 +44,10 @@ It is important that the audio processing that gets done in the idle loop never 
 There is a `stats` module that measures how long the decoding process takes and prints it to the console via defmt and probe-run.
 
 The `i2s_transfer` function is called every time the MCU fires the I2S interrupt. 
-This typically happens after the DMA transfer to the destination peripheral (the UDA1334A DAC) is complete.
-We have a double buffer setup where we write to one buffer as the DMA transfer is happening on the other buffer. 
-We dequeue data (originating from our `idle` loop) and copy it to the tx `buffer` we intend to send.
-We toggle between the two buffers and set up the next transfer using the `i2s.tx(buffer)` function call. 
-This i2s transfer interrupt fires regardless of whether or not the `idle` loop has generated enough data for it so if there is no data we fill the space with silence (zero the buffer). This should not happen unless decoding is too slow to keep up.
+This happens after the DMA transfer to the destination peripheral (the UDA1334A DAC) is complete.
+We use a lock free BBQueue data structure to keep the time spent in the I2S interrupt handler to a minimum.
+This i2s transfer interrupt fires regardless of whether or not the `idle` loop has generated enough data for it so if there is no data we fill the space with silence. 
+This should not happen unless decoding is too slow to keep up.
 
 # Troubleshooting
 

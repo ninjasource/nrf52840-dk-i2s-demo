@@ -1,10 +1,11 @@
 /*
 
+Copyright notice:
 The code in this module has been copied out of this repo
 https://github.com/ferrous-systems/embedded-trainings-2020
 License: MIT
 
-It may have been modified a little to suit my needs
+It may have been modified a little to suit the needs of this project
 
 */
 

@@ -1,6 +1,5 @@
-use defmt::info;
-
 use crate::time::uptime;
+use defmt::info;
 
 pub struct Stats {
     elapsed_micros: [usize; 100],
@@ -45,9 +44,10 @@ impl Stats {
             let mins = self.num_secs / 60;
             let secs = self.num_secs % 60;
             let avg_micros = self.elapsed_micros.iter().sum::<usize>() / self.elapsed_micros.len();
+            let max_micros = self.elapsed_micros.iter().max().unwrap();
             info!(
-                "uptime: {} mins {} secs, avg micros: {}",
-                mins, secs, avg_micros
+                "uptime: {} mins {} secs, avg micros: {} max micros: {}",
+                mins, secs, avg_micros, max_micros
             );
             self.start_period_micros = uptime().as_micros();
         }
