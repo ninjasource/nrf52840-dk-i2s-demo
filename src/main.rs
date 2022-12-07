@@ -6,8 +6,9 @@ mod stats;
 mod time;
 
 // Tested with nRF52840-DK and a UDA1334a DAC
+use defmt_rtt as _;
 use nrf52840_hal as hal;
-use panic_probe as _; // panic magic
+use panic_probe as _; // panic magic // global logger
 
 #[rtic::app(device = crate::hal::pac, peripherals = true, dispatchers = [SWI0_EGU0, SWI1_EGU1])]
 mod app {
